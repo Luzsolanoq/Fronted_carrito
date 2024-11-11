@@ -1,0 +1,170 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/catalogo"></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Detalle del Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Carrito</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Selector de Cliente -->
+  <ion-item lines="none" class="select-item">
+    <ion-label>Seleccionar Cliente</ion-label>
+    <ion-select [(ngModel)]="clienteSeleccionado" (ionChange)="mostrarClienteSeleccionado()">
+      <ion-select-option *ngFor="let cliente of clientes" [value]="cliente">
+        {{ cliente.nombres }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Título Datos del Cliente -->
+  <ion-item>
+    <ion-label>
+      <h2>Datos del Cliente</h2>
+    </ion-label>
+  </ion-item>
+
+  <!-- Mostrar datos del cliente seleccionado -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4">
+        <ion-item *ngIf="clienteSeleccionado">
+          <ion-label position="stacked">Nombres</ion-label>
+          <ion-input [value]="clienteSeleccionado.nombres" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-item *ngIf="clienteSeleccionado">
+          <ion-label position="stacked">DNI</ion-label>
+          <ion-input [value]="clienteSeleccionado.ruc_dni" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-item *ngIf="clienteSeleccionado">
+          <ion-label position="stacked">Dirección</ion-label>
+          <ion-input [value]="clienteSeleccionado.direccion" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Título Detalle de Productos -->
+  <ion-item>
+    <ion-label>
+      <h2>Detalle de Productos</h2>
+    </ion-label>
+  </ion-item>
+
+  <!-- Tabla de productos en el carrito -->
+  <ion-grid>
+    <ion-row class="header-row">
+      <ion-col class="header-col">Código</ion-col>
+      <ion-col class="header-col">Descripción</ion-col>
+      <ion-col class="header-col">Precio</ion-col>
+      <ion-col class="header-col">Cantidad</ion-col>
+      <ion-col class="header-col">Subtotal</ion-col>
+      <ion-col class="header-col">Eliminar</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of listaItemsCarrito ; let i=index" class="item-row">
+      <ion-col>{{item.idproducto}}</ion-col>
+      <ion-col>{{item.descripcion}}</ion-col>
+      <ion-col>{{item.precio}}</ion-col>
+      <ion-col>{{item.cantidad}}</ion-col>
+      <ion-col>{{item.cantidad! * item.precio!}}</ion-col>
+      <ion-col>
+        <ion-button color="danger" (click)="eliminarProductoCarrito(i)">
+          <ion-icon name="trash-outline" slot="icon-only" style="color: white;"></ion-icon> <!-- Icono de eliminar -->
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col class="total-label">Total</ion-col>
+      <ion-col>S/.{{total}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row class="button-row">
+    <!-- Botón para vaciar carrito -->
+    <ion-col size="auto">
+      <ion-button color="medium" (click)="VaciarCarrito()">Vaciar Carrito</ion-button>
+    </ion-col>
+
+    <!-- Botón para guardar venta -->
+    <ion-col size="auto">
+      <ion-button color="secondary" (click)="guardarVenta()">Guardar Venta</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<style>
+  .header-row {
+    font-weight: 600;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+
+  .header-col {
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .item-row {
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    align-items: center;
+  }
+
+  .total-row {
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+    background-color: #f8f8f8;
+  }
+
+  .total-label {
+    text-align: right;
+  }
+
+  .ion-button {
+    margin-top: 10px;
+    --border-radius: 8px;
+  }
+  ion-item h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #067086;
+  }
+  .select-item {
+    --inner-padding-top: 0px;
+    --inner-padding-bottom: 0px;
+    --padding-start: 20px;
+    --padding-end: 0px;
+  }
+
+  ion-label {
+    margin-bottom: 0px;
+  }
+
+  ion-select {
+    margin-top: 0px;
+  }
+  .button-row {
+    margin-top: 20px;
+    justify-content: center;
+  }
+</style>

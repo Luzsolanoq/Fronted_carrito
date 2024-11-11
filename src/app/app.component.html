@@ -1,3 +1,23 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Definir el menú -->
+  <ion-menu side="start" menuId="first" contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú Principal</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/home">Home</ion-item>
+        <ion-item routerLink="/categoria">Categoria</ion-item>
+        <ion-item routerLink="/product">Producto</ion-item>
+        <ion-item routerLink="/cliente">Cliente</ion-item>
+        <ion-item routerLink="/catalogo">Catologo de Productos
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
 </ion-app>

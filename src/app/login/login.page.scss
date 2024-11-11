@@ -1,0 +1,42 @@
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.error-message {
+    color: red;
+    /* Cambia el color según tu preferencia */
+    font-weight: bold;
+    /* Otras propiedades opcionales */
+    padding: 15px;
+}
+
+.form-input {
+    position: relative;
+    margin-bottom: 10px;
+
+    ion-icon {
+        position: absolute;
+        top: 27px;
+        z-index: 2;
+        font-size: 1.2rem;
+        left: 5px;
+    }
+
+    ion-label {
+        position: absolute;
+        margin-left: 25px;
+        font-weight: bolder;
+        font-size: 0.8rem;
+        top: 2px;
+    }
+
+    ion-input {
+        font-size: 0.9rem;
+        --padding-start: 26px;
+        --padding-top: 26px;
+        color: #7b7b7b;
+    }
+}

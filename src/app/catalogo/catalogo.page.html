@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Catálogo de Productos</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Catalogo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-button slot="end" fill="clear" [routerLink]="['/carrito']">
+          <ion-button color="primary" fill="outline">
+            Ver
+          <ion-icon name="cart-outline" style="color: blue;"></ion-icon>
+          </ion-button>
+        </ion-button>
+      </ion-item>
+      <ion-item-sliding *ngFor="let producto of productos">
+        <ion-item>
+          <ion-avatar>
+            <img src="http://127.0.0.1:8000/{{producto.foto}}" alt="">
+          </ion-avatar>
+          <ion-label class="ion-margin">
+            <h3 class="title">{{producto.descripcion}}</h3>
+            <p class="subtext"></p>
+          </ion-label>
+          {{producto.precio}}
+          <ion-button (click)="addCarrito(producto)" class="ion-margin">Añadir al Carrito</ion-button>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list> 
+  </div>
+</ion-content>

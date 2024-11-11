@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ edit ? 'Editar ' : 'Agregar ' }} categoría</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cerrarModal()">
+        close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Agregar Categoría</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input formControlName="descripcion" [(ngModel)]="datos.descripcion"></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.descripcion">
+      <small class="error-message" *ngIf="registrarForm.get('descripcion')?.hasError(validation.type) &&
+        (registrarForm.get('descripcion')?.dirty || registrarForm.get('descripcion')?.touched)">
+        {{ validation.message }}</small>
+    </ng-container>
+
+    <ion-button [disabled]="!registrarForm.valid" type="submit" expand="block" padding color="primary"
+      class="ion-margin-top">{{ edit ? 'Actualizar ' : 'Guardar ' }}</ion-button>
+  </form>
+</ion-content>
